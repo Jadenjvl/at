@@ -1,0 +1,65 @@
+/* style.css */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f8ff;
+    text-align: center;
+    padding: 50px;
+}
+
+#game-container {
+    background-color: #ffffff;
+    border: 2px solid #0077b6;
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+h1 {
+    color: #0077b6;
+}
+
+#word-display {
+    font-size: 2rem;
+    margin: 20px 0;
+}
+
+#guess-input {
+    font-size: 1.5rem;
+    padding: 5px;
+    width: 40px;
+    text-align: center;
+}
+
+button {
+    padding: 10px;
+    background-color: #0077b6;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #005f86;
+}
+
+p {
+    font-size: 1.2rem;
+}
+
+#feedback {
+    margin-top: 15px;
+    color: #ff4f4f;
+    font-weight: bold;
+}
+
+#attempts {
+    font-weight: bold;
+    color: #333;
+}
+
+#guessed-letters {
+    color: #ff6700;
+}
