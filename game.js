@@ -10,7 +10,7 @@ function startNewGame() {
     selectedWord = words[Math.floor(Math.random() * words.length)];
     displayWord = '_'.repeat(selectedWord.length);
     guessedLetters = [];
-    remainingAttempts = 6;
+    remainingAttempts = 10;
     updateUI();
 }
 
