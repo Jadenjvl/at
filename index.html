@@ -3,165 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arctic Tundra Spelling Game</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-        .game-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 50px;
-        }
-        .word-list {
-            display: flex;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        .word {
-            padding: 10px;
-            margin: 5px;
-            border: 2px solid #ccc;
-            cursor: move;
-            background-color: #f0f0f0;
-            border-radius: 5px;
-        }
-        .dropzone {
-            padding: 10px;
-            margin: 5px;
-            border: 2px dashed #aaa;
-            min-width: 120px;
-            height: 40px;
-            text-align: center;
-            vertical-align: middle;
-            line-height: 40px;
-            background-color: #f9f9f9;
-            border-radius: 5px;
-        }
-        .timer {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-        .status {
-            font-size: 20px;
-            font-weight: bold;
-            color: green;
-            display: none;
-        }
-        .status.fail {
-            color: red;
-        }
-    </style>
+    <title>Arctic Word Game</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-<div class="game-container">
-    <div class="timer">Time Left: <span id="time-left">40</span> seconds</div>
-    <div class="word-list" id="word-list">
-        <!-- Scrambled words will be dynamically inserted here -->
+    <div id="game-container">
+        <h1>Arctic Word Guessing Game</h1>
+        <p>Guess the word related to the Arctic tundra!</p>
+        <div id="word-display"></div>
+        <div id="feedback"></div>
+        <input type="text" id="guess-input" maxlength="1" placeholder="Guess a letter">
+        <button id="submit-guess">Submit Guess</button>
+        <p>Attempts remaining: <span id="attempts"></span></p>
+        <p>Your guesses: <span id="guessed-letters"></span></p>
     </div>
-    <div class="dropzones">
-        <div class="dropzone" id="dropzone-1">Drop Here</div>
-        <div class="dropzone" id="dropzone-2">Drop Here</div>
-        <div class="dropzone" id="dropzone-3">Drop Here</div>
-        <div class="dropzone" id="dropzone-4">Drop Here</div>
-        <div class="dropzone" id="dropzone-5">Drop Here</div>
-    </div>
-    <div class="status" id="status"></div>
-</div>
-
-<script>
-    // List of words related to the Arctic Tundra
-    const correctWords = ['permafrost', 'arctic', 'snow', 'moss', 'polar'];
-    let scrambledWords = [...correctWords];
-    scrambledWords.sort(() => Math.random() - 0.5); // Shuffle the words
-
-    let timeLeft = 40;
-    let timer;
-    
-    // DOM Elements
-    const timeLeftElement = document.getElementById('time-left');
-    const wordListElement = document.getElementById('word-list');
-    const dropzoneElements = Array.from(document.getElementsByClassName('dropzone'));
-    const statusElement = document.getElementById('status');
-
-    // Initialize the game
-    function initGame() {
-        scrambledWords.forEach((word, index) => {
-            const wordElement = document.createElement('div');
-            wordElement.classList.add('word');
-            wordElement.setAttribute('draggable', 'true');
-            wordElement.textContent = word;
-            wordElement.id = 'word-' + index;
-            wordElement.addEventListener('dragstart', onDragStart);
-            wordListElement.appendChild(wordElement);
-        });
-
-        dropzoneElements.forEach((zone, index) => {
-            zone.addEventListener('dragover', onDragOver);
-            zone.addEventListener('drop', (e) => onDrop(e, index));
-        });
-
-        startTimer();
-    }
-
-    // Drag and drop logic
-    let draggedWord = null;
-
-    function onDragStart(e) {
-        draggedWord = e.target;
-    }
-
-    function onDragOver(e) {
-        e.preventDefault();
-    }
-
-    function onDrop(e, index) {
-        const dropzone = e.target;
-        if (!draggedWord) return;
-
-        // Place the dragged word in the dropzone
-        dropzone.textContent = draggedWord.textContent;
-        dropzone.dataset.word = draggedWord.textContent;
-
-        // Remove the word from the list
-        draggedWord.parentElement.removeChild(draggedWord);
-        draggedWord = null;
-
-        // Check if the game is complete
-        checkCompletion();
-    }
-
-    function checkCompletion() {
-        const droppedWords = dropzoneElements.map(zone => zone.dataset.word);
-        if (droppedWords.length === correctWords.length && JSON.stringify(droppedWords) === JSON.stringify(correctWords)) {
-            clearInterval(timer);
-            statusElement.textContent = 'Correct! You win!';
-            statusElement.style.color = 'green';
-            statusElement.style.display = 'block';
-        }
-    }
-
-    function startTimer() {
-        timer = setInterval(function () {
-            timeLeft--;
-            timeLeftElement.textContent = timeLeft;
-
-            if (timeLeft <= 0) {
-                clearInterval(timer);
-                statusElement.textContent = 'Time is up! You lose!';
-                statusElement.style.color = 'red';
-                statusElement.style.display = 'block';
-            }
-        }, 1000);
-    }
-
-    // Initialize the game when the page loads
-    initGame();
-</script>
-
+    <script src="game.js"></script>
 </body>
 </html>
+
