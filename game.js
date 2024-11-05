@@ -1,16 +1,16 @@
 // game.js
-const words = ['snow', 'blizzard', 'penguin', 'igloo', 'frost', 'aurora', 'iceberg', 'polar'];
+const words = ['polar', 'penguin', 'arctic', 'walrus', 'seal', 'blizzard', 'iceberg', 'tundra', 'aurora', 'muskox'];
 let selectedWord = '';
 let displayWord = '';
 let guessedLetters = [];
-let remainingAttempts = 10;
+let remainingAttempts = 13;
 
 // Function to start a new game
 function startNewGame() {
     selectedWord = words[Math.floor(Math.random() * words.length)];
     displayWord = '_'.repeat(selectedWord.length);
     guessedLetters = [];
-    remainingAttempts = 10;
+    remainingAttempts = 13;
     updateUI();
 }
 
